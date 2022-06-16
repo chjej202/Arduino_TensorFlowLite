@@ -22,6 +22,8 @@ limitations under the License.
 // https://github.com/arduino/Arduino/issues/3088#issuecomment-406655244
 #if defined(__SAM3X8E__)
 #define DEBUG_SERIAL_OBJECT (SerialUSB)
+#elif defined(__OPENCR__)
+#define DEBUG_SERIAL_OBJECT (Serial)
 #else
 #define DEBUG_SERIAL_OBJECT (Serial)
 #endif
@@ -31,7 +33,7 @@ limitations under the License.
 extern "C" void DebugLog(const char* s) {
   static bool is_initialized = false;
   if (!is_initialized) {
-    DEBUG_SERIAL_OBJECT.begin(9600);
+    DEBUG_SERIAL_OBJECT.begin(115200);
     is_initialized = true;
   }
   DEBUG_SERIAL_OBJECT.print(s);

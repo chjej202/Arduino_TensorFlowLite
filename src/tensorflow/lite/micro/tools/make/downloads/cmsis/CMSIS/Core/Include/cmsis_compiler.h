@@ -51,8 +51,21 @@
  * GNU Compiler
  */
 #elif defined ( __GNUC__ )
+  #if defined( __OPENCR__ )
+    #include "stm32f746xx.h"
+  #endif
   #include "cmsis_gcc.h"
 
+  #if defined( __OPENCR__ )
+    #define __SXTB16_RORn(ARG1, ARG2)        __SXTB16(__ROR(ARG1, ARG2))
+  #endif
+
+  #ifndef   __STATIC_FORCEINLINE
+    #define __STATIC_FORCEINLINE                   __STATIC_INLINE
+  #endif
+  #ifndef   __RESTRICT
+    #define __RESTRICT                             __restrict
+  #endif
 
 /*
  * IAR Compiler
