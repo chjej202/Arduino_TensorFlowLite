@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#if defined(ARDUINO) && !defined(ARDUINO_ARDUINO_NANO33BLE)
+#if defined(ARDUINO) && !defined(ARDUINO_ARDUINO_NANO33BLE) && !defined(__OPENCR__)
 #define ARDUINO_EXCLUDE_CODE
 #endif  // defined(ARDUINO) && !defined(ARDUINO_ARDUINO_NANO33BLE)
 
@@ -22,6 +22,18 @@ limitations under the License.
 #include "detection_responder.h"
 
 #include "Arduino.h"
+
+#ifndef LEDR
+#define LEDR (22u)
+#endif
+
+#ifndef LEDG
+#define LEDG (23u)
+#endif
+
+#ifndef LEDB
+#define LEDB (24u)
+#endif
 
 // Flash the blue LED after each inference
 void RespondToDetection(tflite::ErrorReporter* error_reporter,

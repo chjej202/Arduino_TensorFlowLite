@@ -13,6 +13,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
+#ifdef DEFAULT
+#undef DEFAULT
+#endif
+
+#include <unistd.h>
 #include <TensorFlowLite.h>
 
 #include "main_functions.h"
@@ -46,8 +51,17 @@ constexpr int kTensorArenaSize = 136 * 1024;
 static uint8_t tensor_arena[kTensorArenaSize];
 }  // namespace
 
+
+int led_pin_user[4] = { BDPIN_LED_USER_1, BDPIN_LED_USER_2, BDPIN_LED_USER_3, BDPIN_LED_USER_4 };
+
+
 // The name of this function is important for Arduino compatibility.
 void setup() {
+  int i;
+  for (i = 0 ; i < 4 ; i++) {
+    pinMode(led_pin_user[i], OUTPUT);
+  }
+  
   // Set up logging. Google style is to avoid globals or statics because of
   // lifetime uncertainty, but since this has a trivial destructor it's okay.
   // NOLINTNEXTLINE(runtime-global-variables)

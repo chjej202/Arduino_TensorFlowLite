@@ -35,12 +35,11 @@ limitations under the License.
  *    "#define LOAD_SD_LIBRARY" and "#define LOAD_SDFAT_LIBRARY".
  */
 
-#if defined(ARDUINO) && !defined(ARDUINO_ARDUINO_NANO33BLE)
+#if defined(ARDUINO) && !defined(ARDUINO_ARDUINO_NANO33BLE) && !defined(__OPENCR__)
 #define ARDUINO_EXCLUDE_CODE
 #endif  // defined(ARDUINO) && !defined(ARDUINO_ARDUINO_NANO33BLE)
 
 #ifndef ARDUINO_EXCLUDE_CODE
-
 // Required by Arducam library
 #include <SPI.h>
 #include <Wire.h>
@@ -57,7 +56,7 @@ limitations under the License.
 
 // The size of our temporary buffer for holding
 // JPEG data received from the Arducam module
-#define MAX_JPEG_BYTES 4096
+#define MAX_JPEG_BYTES 6144
 // The pin connected to the Arducam Chip Select
 #define CS 7
 
